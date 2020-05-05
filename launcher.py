@@ -1,7 +1,7 @@
 import discord 
 from discord.ext import commands 
 
-TOKEN = "NzA3MDc3ODg1NDQ1NDA2NzUw.XrDjnA.TVD-KH_XcQnSWNGtRwCeDoLHdx8"
+TOKEN = "token here"
 
 cogs = ["cogs.reactions"]
 
