@@ -1,5 +1,6 @@
 import discord 
 from discord.ext import commands 
+from datetime import datetime 
 
 class Moderation(commands.Cog):
     def __init__(self, bot):
@@ -21,11 +22,14 @@ class Moderation(commands.Cog):
             else:
                 return await ctx.send(f"You are unable to mute someone that is higher or equal to your role position.")
         muted = discord.utils.get(server.roles, name="Muted")
+        logs = server.get_channel(7074646466255913370)
         try:
             await user.add_roles(muted, reason=reason)
         except:
             return await ctx.send(f"I am unable to mute that user. Please check my position in the roles and if I have the correct permisisons.")
         await ctx.send(F":ok_hand: Muted.")
+        tm = datetime.utcnow().strftime("%I:%M")
+        await logs.send(f"`[{tm}]` :no_mouth: {user.mention} has been muted indefinitely by {ctx.author}.")
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
