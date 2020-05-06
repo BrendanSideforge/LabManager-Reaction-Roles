@@ -14,6 +14,9 @@ class AntiInvite(commands.Cog):
         server = message.guild
         rere = re.compile(inv)
         invites = rere.findall(message.content)
+        bypass = discord.utils.get(server.roles, name="Lab Security Staff")
+        if bypass in message.author.roles:
+            return
         logs = server.get_channel(7074646466255913370)
         tm = datetime.utcnow().strftime("%I:%M")
         if invites:
@@ -24,3 +27,4 @@ class AntiInvite(commands.Cog):
 
 def setup(bot):
     bot.add_cog(AntiInvite(bot))
+    
